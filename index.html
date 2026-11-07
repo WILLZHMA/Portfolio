@@ -66,16 +66,32 @@ footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);f
 .tl-org{color:var(--muted);font-size:.9rem;margin-bottom:8px}
 .tl-item ul{padding-left:1.1em}.tl-item li{margin-bottom:4px;font-size:.95rem}
 .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:8px}
-.rs{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px}
-.rs h4.rh{font-size:.82rem;letter-spacing:.14em;font-weight:800;text-transform:uppercase;border-bottom:2px solid var(--ink);padding-bottom:4px;margin:0 0 12px}
-.rs .blk{margin-bottom:24px}
-.rs .role{font-weight:700;font-size:1rem}.rs .org{color:var(--accent);font-size:.9rem;font-weight:600}
-.rs .meta{color:var(--muted);font-size:.8rem;margin:2px 0 6px}
-.rs ul{padding-left:1.1em}.rs li{font-size:.9rem;margin-bottom:3px}
-.rs .ach{display:flex;gap:10px;margin-bottom:12px}.rs .ach i{color:var(--accent);font-style:normal}
-.rs .ach b{display:block;font-size:.92rem}.rs .ach span{color:var(--muted);font-size:.82rem}
-.rs .sk-t{color:var(--accent);font-weight:700;font-size:.85rem;margin:8px 0 2px}.rs .sk-p{font-size:.85rem;color:var(--muted)}
-@media (max-width:760px){.rs{grid-template-columns:1fr;padding:20px}}
+.cv{background:#fff;color:#1f2937;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 24px rgba(0,32,96,.10)}
+.cv a{color:#1f4e9c}
+.cv-head{background:#002060;color:#fff;padding:22px 32px}
+.cv-head h3{font-size:1.9rem;line-height:1.2;font-weight:800}
+.cv-head h3 small{font-size:.85rem;font-weight:500;opacity:.7;margin-left:10px;letter-spacing:.1em}
+.cv-head p{font-size:.95rem;margin-top:6px;opacity:.92}
+.cv-body{display:grid;grid-template-columns:1.75fr 1fr}
+.cv-main{padding:6px 32px 30px}
+.cv-side{background:#f2f5f9;padding:22px 22px 30px}
+.cv h4.ch{color:#1f3a5f;font-size:1.05rem;font-weight:800;border-bottom:2px solid #1f3a5f;padding-bottom:3px;margin:22px 0 10px}
+.cv-side h4.ch:first-of-type{margin-top:20px}
+.cv p,.cv li,.cv dd{font-size:.88rem;color:#4b5563}
+.cv ul{padding-left:1.1em}.cv li{margin-bottom:4px}
+.cv h5{color:#1f3a5f;font-size:.95rem;font-weight:800;margin:14px 0 3px}
+.cv-role{font-weight:800;font-size:1rem;color:#111827}
+.cv-org{font-weight:700;font-size:.9rem;color:#1f3a5f}.cv-org span{font-weight:400;color:#6b7280;font-size:.82rem;margin-left:8px}
+.cv-photo{display:block;width:120px;height:auto;margin:0 auto;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.pyr{display:flex;flex-direction:column;gap:3px;max-width:300px;margin:0 auto}
+.pyr div{text-align:center;padding:9px 0 8px;color:#fff;line-height:1.3}
+.pyr b{display:block;font-size:.78rem}.pyr span{font-size:.64rem;opacity:.9}
+.pyr .l1{background:#1e3a5f;clip-path:polygon(22% 0,78% 0,83.5% 100%,16.5% 100%)}
+.pyr .l2{background:#2a5080;clip-path:polygon(16.5% 0,83.5% 0,89% 100%,11% 100%)}
+.pyr .l3{background:#3d6ea8;clip-path:polygon(11% 0,89% 0,94.5% 100%,5.5% 100%)}
+.pyr .l4{background:#a8c5e3;color:#1f3a5f;clip-path:polygon(5.5% 0,94.5% 0,100% 100%,0 100%)}
+.cv dt{font-weight:800;font-size:.85rem;color:#1f3a5f;margin-top:8px}.cv dd{margin:0}
+@media (max-width:760px){.cv-body{grid-template-columns:1fr}.cv-main{padding:6px 20px 24px}.cv-head{padding:18px 20px}}
 @media (max-width:560px){nav a{margin-left:12px}.project{padding:20px}.theme-btn{margin-left:10px}}
 </style>
 </head>
@@ -83,16 +99,16 @@ footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);f
 <div class="wrap">
   <header class="top">
     <div class="logo">WILLZH</div>
-    <nav><a href="#projects">作品</a><a href="#writing">文章</a><a href="#skills">能力</a><a href="#resume">履歷</a><a href="#contact">聯絡</a><a href="https://willzhma.github.io/Portfolio-EN/" hreflang="en" lang="en" style="border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-size:.82rem">EN</a><button class="theme-btn" id="themeBtn" aria-label="切換深淺色">◐</button></nav>
+    <nav><a href="#projects">作品</a><a href="#writing">文章</a><a href="#skills">能力</a><a href="#resume">履歷</a><a href="#contact">聯絡</a><a href="en/index.html" hreflang="en" lang="en" style="border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-size:.82rem">EN</a><button class="theme-btn" id="themeBtn" aria-label="切換深淺色">◐</button></nav>
   </header>
 
   <div class="hero">
     <div class="eyebrow">Market Analysis × Data Tools</div>
     <h1>把市場資料<br>變成每天會用的工具</h1>
-    <p>資訊管理與數學背景，在半導體業手機部門近六年，負責市場與競品分析。我把分析工作中反覆出現的整理、比對流程，親手做成桌面工具與網站，讓團隊用更少時間看懂市場。</p>
+    <p>資訊管理與數學背景，在半導體業手機部門近五年，負責市場與競品分析。我把分析工作中反覆出現的整理、比對流程，親手做成桌面工具與網站，讓團隊用更少時間看懂市場。</p>
     <div class="stats">
       <div class="stat"><b>~6 年</b><span>手機產業市場分析</span></div>
-      <div class="stat"><b>4 套</b><span>獨立開發的資料工具</span></div>
+      <div class="stat"><b>5 套</b><span>獨立開發的資料工具</span></div>
       <div class="stat"><b>3 種</b><span>第三方市場資料來源整合</span></div>
     </div>
   </div>
@@ -180,6 +196,23 @@ footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);f
       </div>
       <div class="tags"><span class="tag">FastAPI</span><span class="tag">MySQL</span><span class="tag">Google OAuth</span><span class="tag">Web Scraping</span><span class="tag">Ubuntu Server</span><span class="tag">Cloudflare Tunnel</span></div>
     </article>
+
+    <!-- Project 5 -->
+    <article class="project">
+      <div class="p-head">
+        <div>
+          <div class="p-kind">個人專案 · 靜態網站（示範資料）</div>
+          <h3>GRGR 綠綠｜農業資訊平台</h3>
+        </div>
+        <div class="btns"><a class="btn primary" href="https://willzhma.github.io/GRXGR/GRGR.html" target="_blank" rel="noopener">開啟入口頁 →</a></div>
+      </div>
+      <p class="lead">把農業新聞、上中下價與整體統計，依使用者角色分流：農友看今天賣哪裡、消費者看這週買什麼、政策者看市場總覽、研究者從問題開始分析。標語是「看見農業，洞察變化，創造成長」。</p>
+      <div class="cols">
+        <div><h4>設計重點</h4><ul><li>手機版 4 種角色入口，電腦版提供政策者「市場脈動儀表板」與研究者「研究工作台」</li><li>入口頁以新聞跑馬燈與行情摘要呈現當日重點</li><li>新聞與數字明確標示為示範資料，避免被誤認為真實行情</li></ul></div>
+        <div><h4>目前狀態與規劃</h4><ul><li>純靜態前端，部署於 GitHub Pages</li><li>內容由程式依日期產生示意資料</li><li>正式版規劃串接政府與農業單位公開資訊，並標示來源與更新時間</li></ul></div>
+      </div>
+      <div class="tags"><span class="tag">HTML / CSS / JS</span><span class="tag">GitHub Pages</span><span class="tag">多角色介面設計</span><span class="tag">手機版 / 電腦版</span><span class="tag">示範資料</span></div>
+    </article>
   </section>
 
   <section id="writing">
@@ -214,47 +247,37 @@ footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);f
 
   <section id="resume">
     <h2>履歷</h2>
-    <p class="sub">Data &amp; Business Analyst｜資訊管理碩士</p>
-    <div class="rs">
-      <div>
-        <div class="blk"><h4 class="rh">Summary</h4>
-          <p style="font-size:.9rem;color:var(--muted)">近 6 年資料分析與商業智慧實務經驗，現於半導體業手機 PM 部門擔任駐點 Data &amp; Business Analyst，專注全球手機市場資料清洗與分析。以 Power BI 儀表板與 Excel + Power Query / M 建立自動化資料處理流程，降低團隊約 40% 重複人工處理時間；並以 Python、PyWebView、HTML / CSS / JavaScript 開發資料應用。另有政府農業情報平台建置與維護經驗。</p></div>
-        <div class="blk"><h4 class="rh">Experience</h4>
-          <div class="role">駐點 Data &amp; Business Analyst｜手機 PM 部門</div>
-          <div class="org">半導體製造業（人力仲介派駐 · 500 人以上）</div>
-          <div class="meta">2021/10 – 至今 · 新竹縣市</div>
-          <ul><li>整合 BCI、GfK、IDC 等多家第三方市場研究資料，透過 Excel 與 Power Query / M 進行清洗、規格化與自動更新，降低團隊約 40% 重複人工處理時間。</li>
-          <li>主導 PM 部門 Power BI 商業智慧平台的架構與視覺化，使用 DAX 建立品牌全球市佔、4G/5G 與區域趨勢分析，提供主管即時市場洞察。</li>
-          <li>依使用者需求開發資料分析介面與功能，結合 Python、PyWebView、HTML / CSS / JavaScript 建立互動圖表與輕量化分析工具，提升資訊取得與視覺化效率。</li>
-          <li>定期整理市場分析結果、報表與商業簡報，支援 PM 團隊進行市場比較與決策討論。</li></ul>
-          <div class="role" style="margin-top:16px">其他資訊專業人員</div>
-          <div class="org">逢甲大學地理資訊中心（數位內容產業 30~100 人）· 雲林縣政府農業處駐點計畫</div>
-          <div class="meta">2020/10 – 2021/10 · 雲林縣斗六市</div>
-          <ul><li>獨立完成資料整理、統計分析與圖表設計，將生產面積、產量、地理分布、市場價格與進出口價格等資料整合至農業情報平台。</li>
-          <li>參與平台系統設計、保固、維護與管理，並協助平台教學介紹、簡報製作及農業相關業務支援。</li></ul></div>
-        <div class="blk"><h4 class="rh">Education</h4>
-          <div class="role">資訊管理研究所 碩士畢業</div><div class="org">國立雲林科技大學</div><div class="meta">2017/09 – 2019/06</div>
-          <div class="role" style="margin-top:10px">應用數學系、輔修資訊管理學系 大學畢業</div><div class="org">私立東海大學</div><div class="meta">2013/09 – 2017/06</div></div>
-        <div class="blk"><h4 class="rh">Projects</h4>
-          <div class="role">股析 Dashboard｜台灣股市結構性</div>
-          <div class="meta">2025/10 – 至今 · <a href="https://github.com/WILLZHMA/stock-dashboard" target="_blank" rel="noopener">github.com/WILLZHMA/stock-dashboard</a></div>
-          <ul><li>串接 TWSE、TPEx、FinMind 等公開資料源，建立歷史市場資料庫與定時同步流程。</li>
-          <li>運用 FastAPI 提供資料查詢並建立 API，涵蓋指數、產業類股、月營收、個股歷史、法人買賣超與 ETF 等資料，並以前端介面呈現市場資訊。</li>
-          <li>專案程式碼與架構完整公開於 GitHub，可作為資料擷取、資料庫、API 與儀表板整合能力的技術佐證。</li></ul></div>
-      </div>
-      <div>
-        <div class="blk"><h4 class="rh">Key Achievements</h4>
-          <div class="ach"><i>◆</i><div><b>優化重複工作流程</b><span>將資料處理時間縮短 40%，提升效率。</span></div></div>
-          <div class="ach"><i>◆</i><div><b>即時數據洞察</b><span>建立全球市場佔有率分析，數據即時呈現。</span></div></div>
-          <div class="ach"><i>◆</i><div><b>自動更新功能開發</b><span>實現市場分析平台自動更新功能，提升 50% 產品開發效率。</span></div></div>
-          <div class="ach"><i>◆</i><div><b>自動化數據清洗</b><span>將數據清洗流程自動化，節省人工時間 40%。</span></div></div></div>
-        <div class="blk"><h4 class="rh">Skills</h4>
-          <div class="sk-t">擅長工具</div><div class="sk-p">BI / 報表：Power BI（DAX、Power Query / M）、Excel、Tableau、VBA、HTML、CSS、JavaScript、PyWebView；資料庫與資料應用：Python、MySQL、R、SPSS、Matlab；AI 輔助分析與開發：ChatGPT、Gemini、Claude、DeepSeek</div>
-          <div class="sk-t">數學計算</div><div class="sk-p">離散數學、線性代數、基礎數學邏輯分析、數值分析、高等微積分、複變函數論</div></div>
-        <div class="blk"><h4 class="rh">Awards</h4>
-          <div class="ach"><i>◆</i><div><b>CUTE 企管盃全國創新服務企劃競賽｜大專校院組決賽第三名</b><span>研究所期間 · 2019</span></div></div></div>
-        <div class="blk"><h4 class="rh">Find Me Online</h4>
-          <div class="sk-p"><a href="https://vocus.cc/article/6aa8f602fd897800013dc90a" target="_blank" rel="noopener">方格子：AI 產業的探討與推測系列</a><br><a href="https://github.com/WILLZHMA" target="_blank" rel="noopener">GitHub：WILLZHMA</a></div></div>
+    <p class="sub">Data &amp; Business Analyst｜手機市場分析與決策支援</p>
+    <div class="cv">
+      <div class="cv-head"><h3>鐘茂瑋<small>WILLZH</small></h3><p>Data &amp; Business Analyst｜手機市場分析與決策支援</p></div>
+      <div class="cv-body">
+        <div class="cv-main"><h4 class="ch" style="margin-top:18px">簡介</h4><p>在半導體業手機 PM 部門擔任駐點 Data &amp; Business Analyst。主要整合 BCI、GfK、IDC 等第三方手機市場資料，維護並建立成資料智庫，協助手機 PM 與主管分析區域市場、追蹤競品、討論策略時提供數據支持。另外也運用 Power BI 平台與前端介面，提供更快速、即時性的資料可視化。</p>
+<h4 class="ch">工作經歷</h4>
+<div class="cv-role">Data &amp; Business Analyst｜手機 PM 部門</div>
+<div class="cv-org">半導體製造業（人力仲介派駐 · 500 人以上）<span>2021/10 – 至今 · 新竹縣市</span></div>
+<h5>1. 市場資料清洗以及正規化</h5><p>整合 BCI、GfK、IDC 等多來源市場研究資料，透過 Excel 與 Power Query / M 進行清洗、欄位合併與資料檢核，每次更新都會核對各來源的欄位是否一致；建立自動更新流程，降低團隊約 40% 重複人工處理時間。</p>
+<h5>2. 專題分析與策略支援</h5><p>依 PM 與主管需求做專題分析，例如各價格帶的 SoC 廠商市佔、平台出貨與平台結構（Socket）分析、各 OEM 的 SoC 與平台滲透率、各價格帶的 OEM 出貨、BCI 月度 segment 分析、4G 價格帶下滑分析。</p>
+<h5>3. 跨部門協作與營運分析支援</h5><p>配合產品管理、財務、庫存管理、業務管理及供應鏈管理等部門的資料需求，提供市場研究資料整理、分析與報表支援，協助不同業務單位取得所需的市場資訊。</p>
+<h5>4. Power BI 市場分析（DAX）</h5><p>負責部門 Power BI 平台的架構與視覺化，使用 DAX 建立品牌全球市佔、OEM 與 SoC 的 TAM / SAM 占比趨勢、4G / 5G、價格帶、產品世代與區域 / 國家比較。</p>
+<h5>5. 手機市場追蹤與內部工具（自行開發：Python、PyWebView、HTML/CSS/JS）</h5>
+<ul><li><b>手機產品時間軸：</b>依價格帶整理各品牌新機的上市時間與起始價格，針對中國各品牌機型做不同規格、前後代的價格對照，並連結手機規格詳細數據。</li>
+<li><b>Market Intelligence：</b>整合 BCI、GfK、IDC 的 Excel 資料、PM 預估數據以及 Sales 數據，進行庫存比對與未來預估；以 Power Query 串 RSS，每天更新市場新聞。</li>
+<li><b>Socket 追蹤表、週報機型追蹤圖表：</b>以 HTML 開發，用時間軸追蹤產品、銷售期間與晶片供應商，可做資料差異檢查與匯入匯出，讓使用者不用手動編修表格，也不用自己搜尋資料、製圖。</li></ul>
+<div class="cv-role" style="margin-top:20px">資料分析師｜雲林縣政府農業處駐點計畫</div>
+<div class="cv-org">逢甲大學地理資訊中心<span>2020/10 – 2021/10 · 雲林縣斗六市</span></div>
+<p style="margin-top:6px">負責農業情報平台的資料整理、統計分析與圖表設計，也參與平台維護、教育訓練與簡報製作。</p>
+<h4 class="ch">個人專案</h4>
+<ul><li><b>產業結構觀察</b>（2025/10 – 至今）：串接 TWSE、TPEx、FinMind 公開資料，以 FastAPI 提供指數、類股、月營收、法人買賣超與 ETF 查詢，並以前端介面呈現。程式碼公開於 <a href="https://github.com/WILLZHMA/stock-dashboard" target="_blank" rel="noopener">GitHub</a>。</li>
+<li><b>GRGR 綠綠</b>：依農友、消費者、政策者、研究者分流的農業資訊平台靜態示範版。<a href="https://willzhma.github.io/GRXGR/GRGR.html" target="_blank" rel="noopener">開啟 →</a></li></ul></div>
+        <aside class="cv-side">
+          <img class="cv-photo" src="assets/profile.png" alt="鐘茂瑋">
+          <h4 class="ch">工作能力</h4><div class="pyr"><div class="l1"><b>策略與決策支援</b><span>市場比較、決策討論</span></div><div class="l2"><b>專題分析與報表</b><span>價格帶、SoC、平台、OEM、週報</span></div><div class="l3"><b>工具與視覺化介面</b><span>Power BI 平台、內部工具開發維護</span></div><div class="l4"><b>資料擷取、清洗、統整</b><span>BCI、GfK、IDC 多來源資料</span></div></div>
+          <h4 class="ch">個人優勢</h4><ul><li>資管與應數背景，邏輯思考、資料處理和程式能力並重</li><li>針對重複性的工作會使用 AI 加速開發工具，邏輯、結果與資料會加以驗證和確認</li><li>習慣進行需求確認，再依回饋調整資料內容和分析資訊</li></ul>
+          <h4 class="ch">專長</h4><dl><dt>BI / 報表</dt><dd>Power BI（DAX、Power Query / M）、Excel、VBA</dd><dt>程式設計</dt><dd>Python、PyWebView、HTML / CSS / JavaScript、R</dd><dt>資料整理</dt><dd>多來源整合、標準化、檢核；MySQL、SQLite</dd><dt>AI 輔助開發</dt><dd>ChatGPT / Gemini / Claude / DeepSeek</dd></dl>
+          <h4 class="ch">學歷</h4><div class="cv-org">國立雲林科技大學</div><p>資訊管理研究所 碩士｜2017 – 2019</p><div class="cv-org" style="margin-top:8px">東海大學</div><p>應用數學系（輔修資管）｜2013 – 2017</p>
+          <h4 class="ch">獲獎</h4><p><b>CUTE 企管盃全國創新服務企劃競賽</b><br>大專校院組決賽第三名 · 2019</p>
+          <h4 class="ch">線上資料</h4><p><a href="https://github.com/WILLZHMA" target="_blank" rel="noopener">GitHub：WILLZHMA</a><br><a href="https://vocus.cc/article/6aa8f602fd897800013dc90a" target="_blank" rel="noopener">方格子：AI 產業系列</a><br><a href="https://willzhma.github.io/GRXGR/GRGR.html" target="_blank" rel="noopener">GRGR 綠綠（農業平台）</a></p>
+        </aside>
       </div>
     </div>
   </section>
