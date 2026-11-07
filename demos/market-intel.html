@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>手機產品銷售預估總覽 | Portfolio Demo</title>
+<style>
+:root{--ink:#1f2430;--soft:#697086;--bg:#12141a;--panel:#fff;--alt:#f6f7fb;--bd:#e3e6ec;--navy:#1b2743;--navy2:#28365a;--gold:#c9971f;--row:#eceef2;--up:#1e8e5a;--down:#c0392b;
+--c0:#c9971f;--c1:#8c8c8c;--c2:#1f3864;--c3:#5b2d82;--c4:#c96a2e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#c7cddb;font-family:-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:13px}
+button,select{font:inherit;cursor:pointer}
+.ticker{display:flex;align-items:center;background:var(--navy);border-bottom:1px solid #0c1428;height:34px;overflow:hidden;color:#dfe5f3}
+.ticker-tag{background:var(--gold);color:var(--navy);font-weight:800;padding:0 14px;height:100%;display:flex;align-items:center;gap:6px;font-size:12px;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--navy);animation:bl 1.2s infinite}
+@keyframes bl{50%{opacity:.2}}
+.track{flex:1;overflow:hidden;white-space:nowrap}
+.scroll{display:inline-block;padding-left:100%;animation:mq 60s linear infinite;font-size:12px}
+.scroll span{margin-right:48px}
+@keyframes mq{to{transform:translateX(-100%)}}
+.mini{margin:0 6px;border:1px solid #39415a;background:none;color:#c7cddb;border-radius:999px;padding:3px 12px;font-size:11px}
+.filters{position:sticky;top:0;z-index:59;display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:center;padding:10px 24px;background:#fff;border-bottom:1px solid var(--bd);color:var(--ink)}
+.fdivider{width:1px;height:22px;background:var(--bd)}
+.fs{display:flex;align-items:center;gap:8px}
+.fs b{font-size:11px;letter-spacing:.1em;color:#8b93a8}
+.chip{border:1px solid var(--bd);background:#fff;color:var(--soft);padding:5px 14px;border-radius:999px;font-weight:600;font-size:12px;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.chip.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.wrap{max-width:2200px;width:100%;margin:0 auto;padding:22px 2vw 60px}
+.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:start}
+.stack{min-width:0}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}}
+.head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;background:var(--navy);border-radius:14px;padding:20px 26px;color:#fff;margin-bottom:20px}
+.head h1{margin:0 0 4px;font-size:22px}.head p{margin:0;font-size:12px;color:#aab3c8}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.nav{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:999px}
+.nav:hover{background:rgba(255,255,255,.22)}
+.wiz{border:1px solid var(--gold);background:var(--gold);color:var(--navy);font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:6px}
+.panel{background:var(--panel);color:var(--ink);border-radius:14px;margin-bottom:20px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.ph{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:14px 20px;border-bottom:1px solid var(--row);background:var(--alt)}
+.ph h3{margin:0;font-size:15px}.ph .sub{font-weight:400;font-size:11.5px;color:var(--soft);margin-left:8px}
+.phr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hint{font-size:11.5px;color:var(--soft)}
+.lbl{font-size:12px;color:var(--soft)}.div{color:#c5c9d4}
+.tg{display:inline-flex;border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.tg button{border:0;background:#fff;padding:4px 12px;font-size:12px;color:var(--soft)}
+.tg button.active{background:var(--navy);color:#fff}
+select{border:1px solid var(--bd);border-radius:6px;padding:4px 8px;background:#fff;color:var(--ink)}
+.ts{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--row);white-space:nowrap;font-size:12.5px}
+th{background:var(--navy);color:#fff;font-weight:700;border-bottom:0}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:#fff;min-width:130px;font-weight:600;z-index:1}
+th:first-child{background:var(--navy)}
+th.yr{text-align:center;border-left:1px solid rgba(255,255,255,.18);background:var(--navy2);color:#fff}
+th small{font-weight:400;color:#aab3c8;font-size:10px}
+tr.t0>td{background:#faf1da!important}tr.t1>td{background:#f2f2f2!important}tr.t2>td{background:#dde6f2!important}tr.t3>td{background:#eee3f6!important}tr.t4>td{background:#fae5d4!important}
+td small{display:block;font-weight:400;color:var(--soft);font-size:10px}
+tr.click.on td{box-shadow:inset 0 -2px 0 var(--navy)}
+.dchip{display:inline-block;padding:1px 7px;border-radius:5px;font-weight:700;font-size:11.5px}
+.dchip.u{background:#e2f3ea;color:var(--up)}.dchip.d{background:#fbe4e1;color:var(--down)}
+.pdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--navy);margin-right:8px}
+td.f{color:var(--ink)}td.a{color:var(--up);font-weight:600}
+tr.cmp td{font-size:11px;color:var(--soft);background:#fff}
+tr.cmp td:first-child{background:#fff;font-weight:400;padding-left:26px;font-size:10.5px}
+.dp{color:var(--up)}.dn{color:var(--down)}
+.seg{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:8px}
+tr.click{cursor:pointer}
+tr.grp td{border-top:2px solid #fff}
+.ov{position:fixed;inset:0;background:rgba(15,20,32,.55);z-index:65;display:flex;align-items:center;justify-content:center;padding:24px}
+.ov[hidden]{display:none}
+.card{background:#fff;color:var(--ink);border-radius:14px;width:min(920px,100%);max-height:min(760px,100%);display:flex;flex-direction:column;overflow:hidden}
+.ch{display:flex;justify-content:space-between;padding:14px 20px;background:var(--navy);color:#fff}
+.ch h3{margin:0;font-size:15px}.ch .s{font-size:12px;color:#c7cddb;margin-top:2px}
+.x{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.1);color:#fff;width:26px;height:26px;border-radius:50%}
+.cb{padding:16px 20px;overflow-y:auto;font-size:12.5px;line-height:1.7}
+.tag{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:999px;font-weight:700}
+.t-ok{background:#e2f3ea;color:var(--up)}.t-mid{background:#fdf0dd;color:#a9701c}.t-end{background:#fbe4e1;color:var(--down)}
+.news{border:1px solid var(--bd);border-radius:8px;padding:10px 14px;margin-bottom:8px}
+.news b{display:block;margin-bottom:2px}.news small{color:var(--soft)}
+.note{background:var(--alt);border:1px solid var(--bd);border-radius:10px;padding:10px 16px;color:var(--soft);line-height:1.7}
+.foot{text-align:center;color:#6d7488;font-size:11.5px;margin-top:10px}
+svg text{font-size:11px;fill:#697086}
+@media(max-width:700px){.wrap{padding:14px 10px}.filters{padding:8px 10px}}
+</style>
+</head>
+<body>
+<div class="ticker">
+  <div class="ticker-tag"><span class="dot"></span>INDUSTRY NEWS</div>
+  <div class="track"><div class="scroll" id="tick"></div></div>
+  <button class="mini" id="bRefresh" title="Demo：以示範資料模擬重新整理">↻ 更新新聞</button><button class="mini" id="bNews">詳情 »</button>
+</div>
+
+<div class="filters">
+  <div class="fs"><div id="segBar" style="display:flex;gap:6px;flex-wrap:wrap"></div></div>
+  <div class="fdivider"></div>
+  <div class="fs"><b>年度篩選</b><div id="yrBar" style="display:flex;gap:6px;flex-wrap:wrap"></div></div>
+</div>
+
+<div class="wrap">
+  <div class="head">
+    <div><h1>手機產品銷售預估總覽</h1><p>依產品線 × 通路 × 季度彙整：點擊左側類別可切換下方明細（示範資料）</p></div>
+    <div class="links">
+      <a class="nav" href="../index.html" style="text-decoration:none">← 回作品集</a>
+      <button class="wiz" id="bWiz">庫存分析小精靈</button>
+      <button class="nav" id="bChart">品牌別銷量趨勢</button>
+      <button class="nav" id="bCsv">表格下載</button>
+      <button class="nav" id="bNote">資料來源說明</button>
+    </div>
+  </div>
+
+  <div class="layout"><div class="stack">
+  <div class="panel">
+    <div class="ph"><h3>整體總覽<span class="sub">綠字＝已出貨實績；黑字＝未來預估；下方淡列為比對資料</span></h3>
+      <div class="phr"><span class="hint">點擊列切換明細 ▾</span>
+        <span class="lbl">時間：</span><div class="tg" data-k="sumP"><button data-v="Q" class="active">Quarter</button><button data-v="Y">Year</button></div>
+        <span class="div">|</span><span class="lbl">單位：</span><div class="tg" data-k="sumU"><button data-v="1">Units</button><button data-v="1000" class="active">K</button><button data-v="1000000">Mu</button></div>
+      </div></div>
+    <div class="ts"><table id="tSum"></table></div>
+  </div>
+  <div class="panel">
+    <div class="ph"><h3 id="platTitle"></h3>
+      <div class="phr"><span class="hint">各 Platform：部門1／BCI+GFK／部門2 三份資料對照</span>
+        <span class="lbl">時間：</span><div class="tg" data-k="platP"><button data-v="Q" class="active">Quarter</button><button data-v="Y">Year</button></div>
+        <span class="div">|</span><span class="lbl">單位：</span><div class="tg" data-k="platU"><button data-v="1">Units</button><button data-v="1000" class="active">K</button><button data-v="1000000">Mu</button></div>
+      </div></div>
+    <div class="ts"><table id="tPlat"></table></div>
+  </div></div>
+  <div class="stack">
+
+  <div class="panel">
+    <div class="ph"><h3 id="prodTitle"></h3>
+      <div class="phr"><span class="hint" id="prodHint"></span>
+        <span class="lbl">時間：</span><div class="tg" data-k="prodP"><button data-v="Q" class="active">Quarter</button><button data-v="Y">Year</button></div></div></div>
+    <div class="ts"><table id="tProd"></table></div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h3 id="cumTitle"></h3>
+      <div class="phr"><span class="hint">累計到該季為止的總量</span>
+        <span class="lbl">基準：</span><select id="cumBase"><option value="bo">部門1</option><option value="pm">部門2</option><option value="hist">BCI+GFK</option></select>
+        <span class="lbl">比較：</span><select id="cumCmp"></select></div></div>
+    <div class="ts"><table id="tCum"></table></div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h3 id="brTitle"></h3>
+      <div class="phr"><span class="hint">點擊列可展開 Platform 明細</span>
+        <span class="lbl">單位：</span><div class="tg" data-k="brU"><button data-v="1">Units</button><button data-v="1000" class="active">K</button><button data-v="1000000">Mu</button></div></div></div>
+    <div class="ts"><table id="tBr"></table></div>
+  </div>
+  </div></div>
+  <p class="foot">本頁所有數據皆為隨機產生之示範資料，僅作為作品集展示用途。</p>
+</div>
+
+<div class="ov" id="oNews" hidden><div class="card"><div class="ch"><div><h3>產業新聞</h3><div class="s" id="newsSub">示範新聞列表（虛構內容）</div></div><button class="x" data-c="oNews">X</button></div><div class="cb"><div class="news" style="background:#f6f8fc"><b>RSS 來源（Excel Power Query 連線）</b><small>DigiTimes 半導體/零組件 · DigiTimes IC設計 · TechNews 半導體 · GSMArena 新機新聞(英文)<br>實際流程：Excel 連結 RSS → Power Query 讀取 → 本頁按「更新新聞」重新整理連線並載入資料夾內的新資料。此 Demo 為靜態頁，以下標題為虛構示範。</small></div><div id="newsList"></div></div></div></div>
+<div class="ov" id="oWiz" hidden><div class="card"><div class="ch"><div><h3>庫存分析小精靈</h3><div class="s">自動比對 部門1 實績與歷史，抓生命週期與異常，僅供參考</div></div><button class="x" data-c="oWiz">X</button></div><div class="cb" id="wizBody"></div></div></div>
+<div class="ov" id="oChart" hidden><div class="card"><div class="ch"><div><h3>品牌別銷量趨勢</h3><div class="s" id="chSub"></div></div><button class="x" data-c="oChart">X</button></div><div class="cb">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px"><span class="hint" id="chHint"></span>
+  <div><span class="lbl">資料來源：</span><div class="tg" data-k="chS"><button data-v="bo">部門1</button><button data-v="pm">部門2</button><button data-v="hist" class="active">BCI+GFK</button></div></div></div>
+  <div id="chart"></div><div id="legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px"></div></div></div></div>
+<div class="ov" id="oNote" hidden><div class="card"><div class="ch"><div><h3>資料來源說明</h3></div><button class="x" data-c="oNote">X</button></div><div class="cb">
+  <div class="note"><b>部門1</b>：以出貨資料為基準，過去季度為已出貨實績，未來季度為預估。<br><b>BCI+GFK</b>：通路市場調查資料，僅比對「過去」的通路去化狀況。<br><b>部門2</b>：另一部門提供的未來預測，與部門1 的未來預估比對。<br>※ 本頁全部為隨機產生的示範資料。</div></div></div></div>
+
+<script>
+const $=s=>document.querySelector(s);
+let seed=20260930;const rnd=()=>(seed=(seed*1664525+1013904223)%4294967296)/4294967296;
+const SEGS=[{n:'Flagship',c:'--c0',b:900},{n:'Premium',c:'--c1',b:1400},{n:'High',c:'--c2',b:2600},{n:'Mid',c:'--c3',b:4200},{n:'Entry',c:'--c4',b:5200}];
+const SEGCOL=['#c9971f','#8c8c8c','#1f3864','#5b2d82','#c96a2e'];
+const BRANDS=['Nova','Orbit','Zenith','Pulse','Lumen'];
+const YEARS=[2023,2024,2025,2026,2027],QS=[];YEARS.forEach(y=>[1,2,3,4].forEach(q=>QS.push({y,q,k:y+'Q'+q})));
+const ACT=QS.findIndex(x=>x.k==='2026Q3'); // index of first forecast quarter
+const PNAMES=['AERIS','BOREA','CIRRUS','DELTA','EMBER','FJORD'];
+// data: plat[s][p] = {bo:[],pm:[],hist:[],br:{brand:[...]}}
+const D=SEGS.map((s,si)=>PNAMES.map((pn,pi)=>{
+  const base=s.b*(1.45-pi*.2)*1000/6,o={name:`${pn} ${['X','S','M','E','L'][si]}${pi+1}00`,bo:[],pm:[],hist:[],br:{}};
+  BRANDS.forEach(b=>o.br[b]={bo:[],pm:[],hist:[]});
+  QS.forEach((_,i)=>{
+    const seas=1+.12*Math.sin(i*1.6)+(i*.015);
+    const v=Math.round(base*seas*(0.85+rnd()*.3)*(si<2?1+i*.01:1));
+    o.bo.push(v);
+    o.pm.push(i>=ACT?Math.round(v*(0.92+rnd()*.18)):null);
+    o.hist.push(i<ACT?Math.round(v*(0.9+rnd()*.15)):null);
+    const w=BRANDS.map(()=>.3+rnd());const tw=w.reduce((a,b)=>a+b,0);
+    BRANDS.forEach((b,bi)=>{const share=w[bi]/tw;const r=o.br[b];
+      r.bo.push(Math.round(v*share));r.pm.push(o.pm[i]==null?null:Math.round(o.pm[i]*share));r.hist.push(o.hist[i]==null?null:Math.round(o.hist[i]*share))});
+  });return o;}));
+const st={seg:3,yr:'all',platP:'Q',platU:1000,sumP:'Q',sumU:1000,prodP:'Q',brU:1000,chS:'hist',open:null};
+const sum=a=>a.reduce((x,y)=>x+(y||0),0);
+const fmt=(v,u)=>v==null?'–':(v/u).toLocaleString('en-US',{maximumFractionDigits:u===1?0:u===1000?0:2});
+const cols=p=>{const L=QS.map((q,i)=>({...q,i})).filter(q=>st.yr==='all'||q.y==+st.yr);
+  if(p==='Q')return L.map(q=>({h:String(q.y).slice(2)+'Q'+q.q,y:q.y,idx:[q.i],fc:q.i>=ACT}));
+  const ys=[...new Set(L.map(q=>q.y))];return ys.map(y=>{const idx=L.filter(q=>q.y===y).map(q=>q.i);return{h:'FY'+String(y).slice(2),y,idx,fc:idx[0]>=ACT}})};
+const val=(arr,c)=>c.idx.some(i=>arr[i]!=null)?sum(c.idx.map(i=>arr[i])):null;
+const head=(C,first)=>{const ys=[...new Set(C.map(c=>c.y))];
+  return `<thead><tr><th></th>${ys.map(y=>`<th class="yr" colspan="${C.filter(c=>c.y===y).length}">${y}</th>`).join('')}</tr><tr><th>${first}</th>${C.map(c=>`<th>${c.h}${c.fc?'<br><small>FCST</small>':''}</th>`).join('')}</tr></thead>`};
+const dl=(a,b)=>{if(a==null||b==null||!b)return'–';const d=(a/b-1)*100;return`<span class="${d>=0?'dp':'dn'}">${d>=0?'+':''}${d.toFixed(1)}%</span>`};
+const segTot=(si,k)=>QS.map((_,i)=>D[si].some(p=>p[k][i]==null)?null:sum(D[si].map(p=>p[k][i])));
+
+function renderSum(){const C=cols(st.sumP),u=st.sumU;let h=head(C,'手機產品線')+'<tbody>';
+  SEGS.forEach((s,si)=>{const bo=segTot(si,'bo'),cmp=QS.map((_,i)=>i<ACT?segTot(si,'hist')[i]:segTot(si,'pm')[i]);
+    h+=`<tr class="click t${si} ${si===st.seg?'on':''}" data-s="${si}"><td>${s.n}<small>部門1</small></td>${C.map(c=>`<td class="${c.fc?'f':'a'}">${fmt(val(bo,c),u)}</td>`).join('')}</tr>
+    <tr class="cmp t${si}"><td>BCI+GFK / 部門2<small>${s.n}</small></td>${C.map(c=>`<td>${fmt(val(cmp,c),u)}</td>`).join('')}</tr>`});
+  $('#tSum').innerHTML=h+'</tbody>'}
+
+const chipD=(a,b,u)=>{if(b==null)return a==null?'–':fmt(a,u);if(a==null)return '–';const d=a-b;if(!d)return '0';return `<span class="dchip ${d>0?'u':'d'}">${d>0?'▲':'▼'}${fmt(Math.abs(d),u)}</span>`};
+function renderPlat(){const s=SEGS[st.seg],C=cols(st.platP),u=st.platU,tint='t'+st.seg;
+  $('#platTitle').textContent=`Platform 明細 - ${s.n}`;
+  let h=head(C,'Platform')+'<tbody>';
+  D[st.seg].forEach(p=>{
+    h+=`<tr class="${tint} grp"><td><span class="pdot"></span>${p.name}<small>部門1</small></td>${C.map(c=>`<td class="${c.fc?'f':'a'}">${fmt(val(p.bo,c),u)}</td>`).join('')}</tr>
+    <tr class="cmp"><td>BCI+GFK</td>${C.map(c=>`<td>${fmt(val(p.hist,c),u)}</td>`).join('')}</tr>
+    <tr class="cmp"><td>部門2</td>${C.map(c=>`<td>${fmt(val(p.pm,c),u)}</td>`).join('')}</tr>`});
+  $('#tPlat').innerHTML=h+'</tbody>'}
+function renderProd(){const s=SEGS[st.seg],C=cols(st.prodP);
+  $('#prodTitle').textContent=`產品明細 - ${s.n} (部門1 對比 BCI+GFK)`;$('#prodHint').textContent=`差異＝部門1 − BCI+GFK（K）；未來季度僅顯示 部門1`;
+  let h=head(C,'Platform')+'<tbody>';
+  D[st.seg].forEach(p=>{h+=`<tr><td><span class="pdot"></span>${p.name}</td>${C.map(c=>{const a=val(p.bo,c),b=val(p.hist,c);return `<td>${b==null?`<span style="color:var(--soft)">${fmt(a,1000)}</span>`:chipD(a,b,1000)}</td>`}).join('')}</tr>`});
+  const tot=QS.map((_,i)=>sum(D[st.seg].map(p=>p.bo[i]))),th=QS.map((_,i)=>i<ACT?sum(D[st.seg].map(p=>p.hist[i])):null);
+  h+=`<tr style="font-weight:700"><td>${s.n} 合計</td>${C.map(c=>`<td>${chipD(val(tot,c),val(th,c),1000)}</td>`).join('')}</tr>`;
+  $('#tProd').innerHTML=h+'</tbody>'}
+
+function cum(arr){let t=0,started=false;return arr.map(v=>{if(v!=null){t+=v;started=true}return started&&v!=null?t:null})}
+function renderCum(){const s=SEGS[st.seg],b=$('#cumBase').value;
+  const opts=[['bo','部門1'],['pm','部門2'],['hist','BCI+GFK']].filter(o=>o[0]!==b);
+  const cur=$('#cumCmp').value;$('#cumCmp').innerHTML=opts.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('');
+  if(opts.some(o=>o[0]===cur))$('#cumCmp').value=cur;else $('#cumCmp').value=opts[opts.length-1][0];
+  const c=$('#cumCmp').value,nm={bo:'部門1',pm:'部門2',hist:'BCI+GFK'};
+  $('#cumTitle').textContent=`累計出貨 - ${s.n} (${nm[b]} 對比 ${nm[c]})`;
+  const C=cols('Q');let h=head(C,'Platform')+'<tbody>';
+  D[st.seg].forEach(p=>{const A=cum(p[b]),B=cum(p[c]);h+=`<tr><td><span class="pdot"></span>${p.name}</td>${C.map(x=>{const i=x.idx[0];return `<td>${chipD(A[i],B[i],1000)}</td>`}).join('')}</tr>`});
+  $('#tCum').innerHTML=h+'</tbody>'}
+
+function renderBr(){const s=SEGS[st.seg],C=cols('Q'),u=st.brU;$('#brTitle').textContent=`品牌別明細 - ${s.n}`;
+  let h=head(C,'Brand')+'<tbody>';
+  BRANDS.forEach(b=>{const arr=QS.map((_,i)=>sum(D[st.seg].map(p=>p.br[b].bo[i])));
+    h+=`<tr class="click ${st.open===b?'on':''}" data-b="${b}"><td>${st.open===b?'⊖':'⊕'} ${b}</td>${C.map(c=>`<td class="${c.fc?'f':'a'}">${fmt(val(arr,c),u)}</td>`).join('')}</tr>`;
+    if(st.open===b)D[st.seg].forEach(p=>{const a=p.br[b].bo;h+=`<tr class="cmp"><td>${p.name}</td>${C.map(c=>`<td>${fmt(val(a,c),u)}</td>`).join('')}</tr>`})});
+  $('#tBr').innerHTML=h+'</tbody>'}
+
+function renderChart(){const s=SEGS[st.seg],k=st.chS;const cs=['#c9971f','#1f3864','#5b2d82','#1e8e5a','#c0392b'];
+  const data=BRANDS.map(b=>QS.map((_,i)=>{const v=D[st.seg].map(p=>p.br[b][k][i]);return v.some(x=>x==null)?null:sum(v)}));
+  const mx=Math.max(...data.flat().filter(x=>x!=null))*1.1,W=760,H=300,L=46,B=28,X=i=>L+i*(W-L-10)/(QS.length-1),Y=v=>H-B-(v/mx)*(H-B-10);
+  let g='';for(let t=0;t<=4;t++){const v=mx*t/4;g+=`<line x1="${L}" x2="${W}" y1="${Y(v)}" y2="${Y(v)}" stroke="#eceef2"/><text x="4" y="${Y(v)+4}">${Math.round(v/1000)}K</text>`}
+  QS.forEach((q,i)=>{if(q.q===1||i===QS.length-1)g+=`<text x="${X(i)-14}" y="${H-8}">${q.k}</text>`});
+  data.forEach((d,bi)=>{let pts=d.map((v,i)=>v==null?null:`${X(i)},${Y(v)}`).filter(Boolean);if(pts.length)g+=`<polyline fill="none" stroke="${cs[bi]}" stroke-width="2.2" points="${pts.join(' ')}"/>`});
+  $('#chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%">${g}</svg>`;
+  $('#legend').innerHTML=BRANDS.map((b,i)=>`<span><span class="seg" style="background:${cs[i]}"></span>${b}</span>`).join('');
+  $('#chSub').textContent={bo:'部門1 各季出貨',pm:'部門2 未來預測',hist:'BCI+GFK 各季加總'}[k];
+  $('#chHint').textContent=`目前類別：${s.n}（與上方 Segment 共用）`;}
+
+function renderWiz(){let h='<p class="hint">資料版本：2026-Q3 demo（隨機產生）</p><div class="cb" style="padding:0"><b>年度總覽</b>';
+  h+='<table style="margin:8px 0 14px"><tr><th>Segment</th><th>2025 實績</th><th>2026 預估</th><th>YoY</th><th>生命週期</th></tr>';
+  SEGS.forEach((s,si)=>{const a=sum(QS.filter(q=>q.y===2025).map(q=>segTot(si,'bo')[QS.indexOf(q)])),b=sum(QS.filter(q=>q.y===2026).map(q=>segTot(si,'bo')[QS.indexOf(q)]));
+    const y=(b/a-1)*100;h+=`<tr><td>${s.n}</td><td>${fmt(a,1000)}K</td><td>${fmt(b,1000)}K</td><td class="${y>=0?'dp':'dn'}">${y>=0?'+':''}${y.toFixed(1)}%</td><td><span class="tag ${y>4?'t-ok':y>-4?'t-mid':'t-end'}">${y>4?'成長期':y>-4?'成熟期':'衰退期'}</span></td></tr>`});
+  h+='</table><b>異常觀察</b>';
+  [['Aeris X1100','2026Q2 通路去化低於出貨 12%，建議關注庫存水位'],['Cirrus M3300','2025Q4 實績高於 部門2 預測 9%，可能為促銷拉貨'],['Borea E2200','連續兩季預估下修，疑似接近生命週期尾聲']].forEach(a=>h+=`<div class="news"><b>${a[0]}</b><small>${a[1]}</small></div>`);
+  h+='<p class="hint" style="border-top:1px dashed #e3e6ec;padding-top:10px">以上為系統自動分析結果，門檻為簡化的啟發式規則，僅供參考。</p></div>';$('#wizBody').innerHTML=h}
+
+let NEWS=[['Aeris 系列新一代處理器完成量產驗證','示範來源 A','2026-09-28'],['北美通路 Q3 中階機種出貨優於預期','示範來源 B','2026-09-26'],['Orbit 品牌宣佈入門機種價格調整','示範來源 C','2026-09-24'],['全球記憶體報價連續第二季上漲','示範來源 A','2026-09-20'],['Nova 旗艦新機將於 10 月亮相','示範來源 B','2026-09-18']];
+$('#tick').innerHTML=NEWS.map(n=>`<span>▪ ${n[0]}</span>`).join('');
+$('#newsList').innerHTML=NEWS.map(n=>`<div class="news"><b>${n[0]}</b><small>${n[1]} · ${n[2]}</small></div>`).join('');
+
+function mkBar(){$('#segBar').innerHTML=SEGS.map((s,i)=>`<button class="chip ${i===st.seg?'active':''}" data-s="${i}"><i style="background:${SEGCOL[i]}"></i>${s.n}</button>`).join('');
+  $('#yrBar').innerHTML=['all',...YEARS].map(y=>`<button class="chip ${String(y)===st.yr?'active':''}" data-y="${y}">${y==='all'?'全部':y}</button>`).join('')}
+function all(){mkBar();renderSum();renderPlat();renderProd();renderCum();renderBr();if(!$('#oChart').hidden)renderChart()}
+
+document.addEventListener('click',e=>{const t=e.target;
+  const s=t.closest('[data-s]');if(s){st.seg=+s.dataset.s;st.open=null;all();return}
+  const y=t.closest('[data-y]');if(y){st.yr=y.dataset.y;all();return}
+  const b=t.closest('[data-b]');if(b){st.open=st.open===b.dataset.b?null:b.dataset.b;renderBr();return}
+  const tg=t.closest('.tg button');if(tg){const k=tg.parentNode.dataset.k,v=tg.dataset.v;st[k]=['sumU','brU','platU'].includes(k)?+v:v;
+    tg.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===tg));all();return}
+  const c=t.closest('[data-c]');if(c){$('#'+c.dataset.c).hidden=true;return}
+  if(t.classList.contains('ov'))t.hidden=true});
+$('#cumBase').onchange=renderCum;$('#cumCmp').onchange=renderCum;
+const POOL=[['半導體：先進封裝產能持續吃緊，供應鏈擴產動作加快','DigiTimes（示範）'],['IC 設計：庫存調整接近尾聲，下半年出貨回升','DigiTimes（示範）'],['晶圓代工：成熟製程報價動向觀察','TechNews（示範）'],['記憶體：行動 DRAM 合約價上揚','TechNews（示範）'],['New flagship phone leaks point to higher-refresh display','GSMArena（示範）'],['Mid-range handset launch roundup for the quarter','GSMArena（示範）'],['零組件：鏡頭模組出貨受新機拉貨帶動','DigiTimes（示範）'],['5G 晶片競局：中階市場價格戰升溫','TechNews（示範）']];
+let nTick=0;
+$('#bRefresh').onclick=function(){const b=this;b.disabled=true;b.textContent='更新中…';
+ setTimeout(()=>{nTick++;const d=new Date().toISOString().slice(0,10);
+  const pick=POOL.map((x,i)=>[(i*5+nTick*3)%POOL.length,x]).sort((a,b)=>a[0]-b[0]).slice(0,6).map(a=>[a[1][0],a[1][1],d]);
+  NEWS=pick;
+  $('#tick').innerHTML=NEWS.map(n=>`<span>▪ ${n[0]}</span>`).join('');
+  $('#newsList').innerHTML=NEWS.map(n=>`<div class="news"><b>${n[0]}</b><small>${n[1]} · ${n[2]}</small></div>`).join('');
+  $('#newsSub').textContent='已於 '+new Date().toLocaleTimeString('zh-TW',{hour12:false})+' 更新（示範資料）';
+  b.disabled=false;b.textContent='↻ 更新新聞';},900);};
+$('#bNews').onclick=()=>$('#oNews').hidden=false;
+$('#bWiz').onclick=()=>{renderWiz();$('#oWiz').hidden=false};
+$('#bChart').onclick=()=>{renderChart();$('#oChart').hidden=false};
+$('#bNote').onclick=()=>$('#oNote').hidden=false;
+$('#bCsv').onclick=()=>{const C=cols('Q');let r=[['Segment','Platform',...C.map(c=>c.y+c.h)]];
+  D.forEach((ps,si)=>ps.forEach(p=>r.push([SEGS[si].n,p.name,...C.map(c=>val(p.bo,c))])));
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+r.map(x=>x.join(',')).join('\n')],{type:'text/csv'}));a.download='sales_forecast_demo.csv';a.click()};
+all();
+</script>
+</body>
+</html>
